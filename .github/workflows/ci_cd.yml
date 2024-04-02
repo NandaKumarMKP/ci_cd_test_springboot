@@ -11,8 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql start
+      - name: Set up MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql root password: "" # Required if "mysql user" is empty, default is empty. The root superuser password
+          mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+          mysql password: ''
       - name: Checkout Code
         uses: actions/checkout@v3
       - name: Setup JDK 17
